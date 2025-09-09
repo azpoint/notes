@@ -1,143 +1,135 @@
-# 🚀 Deploying Your Docker Swarm Stack to VPS
-
-Perfect — you're almost there. Here's a clean step-by-step guide to deploy your Docker Swarm stack to your VPS using the **`deploy`** user you've configured.
+A **clean, repeatable workflow** for working with Python virtual environments and VS Code.
 
 ---
 
-## ✅ Prerequisites Recap
-
-Make sure the following is done **before proceeding**:
-
-- ✅ VPS is accessible via SSH with your **`deploy`** user.
-- ✅ Docker & Docker Compose are installed on the VPS.
-- ✅ Docker Swarm is initialized.
-- ✅ The **`deploy`** user is in the `docker` group.
-- ✅ You have your stack YAML files (`fazb-stack.yml`, `nginx-stack.yml`, etc.) and `nginx.conf` ready on the VPS.
+# 🔹 Python Virtual Environment Workflow (with VS Code)
 
 ---
 
-## 🚀 Step-by-Step Deployment
-
-### 🔹 1. SSH into your VPS
+## **1. Create a Project Folder**
 
 ```bash
-ssh deploy@your-vps-ip
+mkdir myproject
+cd myproject
 ```
+
+Keep everything project-local so nothing leaks into other projects.
 
 ---
 
-### 🔹 2. Initialize Docker Swarm (if not done yet)
+## **2. Create a Virtual Environment**
+
+Use the Python version you want (managed by `pyenv` or system Python):
 
 ```bash
-docker swarm init
+python -m venv .venv
 ```
 
-> 📝 If it's already initialized, this will return an error — you can ignore it.
+- This creates a `.venv/` directory inside the project.
+- All dependencies go here.
+- Add `.venv/` to `.gitignore` so it doesn’t get committed.
 
 ---
 
-### 🔹 3. Create the Shared Overlay Network
-
-This only needs to be done **once** before deploying stacks that use it.
+## **3. Activate the Environment**
 
 ```bash
-docker network create --driver overlay --attachable fazb-net
+source .venv/bin/activate
 ```
 
----
+Now when you run `python` or `pip`, they point to your isolated environment.
 
-### 🔹 4. Load External Secrets (if not yet created)
-
-Run this for **each secret**:
+Install your dependencies:
 
 ```bash
-echo -n "your-secret-value" | docker secret create jwt_secret -
-echo -n "admin@example.com" | docker secret create sys_admin_email -
-# Repeat for each:
-#   sys_admin_password
-#   admin_mail_verif_password
-#   recaptcha_secret_key
-#   postgres_db
-#   postgres_user
-#   postgres_password
+pip install --upgrade pip
+pip install requests  black pylint isort
 ```
 
-> 🔐 You only need to do this **once per VPS**, unless the secret value changes.
-
----
-
-### 🔹 5. Deploy the App Stack
-
-Ensure `fazb-stack.yml` is on the VPS and run:
+Save them:
 
 ```bash
-docker stack deploy -c fazb-stack.yml fazb
+pip freeze > requirements.txt
 ```
 
----
-
-### 🔹 6. Deploy the NGINX Reverse Proxy
-
-Ensure `nginx.conf` and `nginx-stack.yml` are ready, then run:
+Deactivate when done:
 
 ```bash
-docker stack deploy -c nginx-stack.yml nginx
+deactivate
 ```
 
 ---
 
-### 🔹 7. Verify Deployment
+## **4. Configure VS Code**
 
-Check that the services are running:
+Inside your project, create a `.vscode/` directory:
 
 ```bash
-docker service ls
+mkdir -p .vscode
 ```
 
-You should see both stacks (`fazb_*` and `nginx_nginx`) and their replica counts.
+Add a `settings.json`:
 
-To check logs:
+```json
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "python.analysis.autoImportCompletions": true,
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "black",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
+}
+```
+
+### What this does:
+
+- **Interpreter**: points IntelliSense, debugger, and terminal to your `.venv`.
+- **Auto-activation**: terminals opened in VS Code automatically activate `.venv`.
+- **Formatting**: uses **Black** for code formatting, organizes imports with **isort**.
+- **Linting**: uses **Pylint** for error checking.
+- **Format on save**: every save reformats your file automatically.
+
+---
+
+## **5. Workflow Summary**
+
+1. `python -m venv .venv` → create env
+2. `source .venv/bin/activate` → activate env
+3. `pip install -r requirements.txt` → install deps
+4. `.vscode/settings.json` → tells VS Code to use `.venv`
+5. **Write code** → IntelliSense, linting, and formatting just work.
+
+---
+
+## **6. Optional: Project Bootstrap Script**
+
+To automate steps 2–4, you can add `scripts/init.sh`:
 
 ```bash
-docker service logs -f fazb_fazb-app
+#!/usr/bin/env bash
+python -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+[ -f requirements.txt ] && pip install -r requirements.txt
+deactivate
 ```
 
----
-
-### 🔹 8. Test Your Setup
-
-Visit your VPS IP or domain (if DNS is configured):
-
-```text
-http://your-vps-ip
-```
-
-You should see your app served through **NGINX → Docker Swarm**.
-
----
-
-## 📦 Optional: Organize Folders on the VPS
-
-Consider this structure:
-
-```
-/home/deploy/
-├── stacks/
-│   ├── fazb-stack.yml
-│   ├── nginx-stack.yml
-├── configs/
-│   └── nginx.conf
-```
-
-Then deploy like this:
+Run once per project:
 
 ```bash
-cd ~/stacks
-docker stack deploy -c fazb-stack.yml fazb
+bash scripts/init.sh
 ```
 
 ---
 
-## ✅ That’s it!
+✅ With this setup, every project has:
 
-Your app is now deployed in **production via Docker Swarm**. 🎉
+- Its own isolated `.venv`
+- A reproducible `requirements.txt`
+- VS Code fully wired up for IntelliSense, formatting, linting
+
+---
