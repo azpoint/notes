@@ -39,11 +39,17 @@ source .venv/bin/activate
 
 Now when you run `python` or `pip`, they point to your isolated environment.
 
-Install your dependencies:
+Install your base dependencies:
 
 ```bash
 pip install --upgrade pip
-pip install requests  black pylint isort
+pip install requests black pylint isort
+```
+
+or install packages from list
+
+```bash
+pip install -r requirements.txt
 ```
 
 Save them:
