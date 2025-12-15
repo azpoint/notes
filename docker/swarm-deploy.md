@@ -104,6 +104,16 @@ docker service logs -f fazb_fazb-app
 
 ---
 
+```bash
+docker stack services fazb_app
+docker service ps fazb_app_app
+docker service ps fazb_app_db
+docker service ps fazb_app_volume-init
+```
+
+---
+
+
 ### 🔹 8. Test Your Setup
 
 Visit your VPS IP or domain (if DNS is configured):
