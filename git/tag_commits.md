@@ -15,6 +15,8 @@ git push
 ```bash
 git tag -a v1.1.1 -m "Release v1.1.1"
 ```
+-a annotated flag with metadata for the tag.
+
 - Stored as a full Git object
 
     Include:
