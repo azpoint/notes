@@ -23,6 +23,13 @@ ip address show
 ifconfig enp0s3
 ip addr show dev enp0s3
 ```
+### NetworkManager
+
+```bash
+systemctl status NetworkManager 
+systemctl stop/start NetworkManager #solves network
+systemctl enable/disable NetworkManager #enable disable with system restart
+```
 
 ### Filter by IP version
 
