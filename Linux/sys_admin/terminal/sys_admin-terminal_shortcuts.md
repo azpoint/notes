@@ -269,9 +269,3 @@ If you want to level up further:
 * Zsh widgets (`zle`)
 * Fuzzy finders (`fzf` with CTRL+R override)
 
----
-
-If you want, I can turn this into:
-
-* a **real incident-response workflow simulation**, or
-* a **“zero-to-hero terminal setup”** (aliases, tmux config, prompt, history tuning) that sysadmins actually use in production.

@@ -141,6 +141,3 @@ sudo -i
 * enabling root login unnecessarily → security risk
 * forgetting you're root → accidental destructive commands (`rm -rf /` territory)
 
----
-
-If you want, I can extend this into a **privilege escalation & hardening guide** (sudo policies, disabling root SSH, least privilege, auditing), which is a key part of real sysadmin work.

@@ -334,10 +334,3 @@ If you want to go deeper:
 * `direnv` → per-directory environments
 * `dotenv` → app-level env management
 * systemd `Environment=` directives
-
----
-
-If you want, I can turn this into:
-
-* a **debugging playbook** (why your env “isn’t working”), or
-* a **real-world setups guide** (Python, Node, Docker, etc.) where env variables become critical infrastructure.

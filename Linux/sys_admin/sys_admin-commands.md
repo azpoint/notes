@@ -405,9 +405,3 @@ Once solid:
 * `watch` → repeat commands
 * `nc` (netcat) → raw network debugging
 
----
-
-If you want, I can take this further into:
-
-* a **real incident debugging playbook (step-by-step)**, or
-* a **production-ready command toolkit** (aliases + scripts sysadmins actually rely on daily).

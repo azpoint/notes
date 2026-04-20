@@ -415,10 +415,3 @@ Once solid on the above:
 * `/var/lib/` → app state
 * `/boot/` → kernel + bootloader
 * `crontab` / `/etc/cron.*` → scheduling
-
----
-
-If you want, I can take this further into:
-
-* a **“day in the life of a sysadmin” debugging flow**, or
-* a **production hardening checklist** (SSH, firewall, fail2ban, kernel tuning, etc.) which builds directly on these files.
