@@ -106,9 +106,34 @@ Alt + #     # Toggle line numbers (if supported)
 ```bash id="g7n9xr"
 nano file.txt          # Open/create file
 nano -o file.txt       # Open with backup (varies by config)
+
 ```
 
 ---
+## Display Line numbers
+
+```bash
+Esc + n
+```
+---
+
+## Useful Settings
+
+```bash
+set linenumbers
+set constantshow     # show cursor position
+set tabsize 2        # or 4 depending on your stack
+set autoindent
+set mouse
+```
+---
+## Jump to a line opening a file
+
+```bash
+nano +42 filename
+```
+---
+
 
 ## 🛡️ Helpful Shortcuts
 
