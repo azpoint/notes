@@ -1,0 +1,78 @@
+# Menus example
+
+```bash
+#!/bin/bash
+PS3="Choose your country: "
+select COUNTRY in Germany France USA SPAIN Quit
+do
+	case $REPLY in
+	1)
+		echo "You speak German."
+		;;
+	2)
+		echo "you Speak French."
+		;;
+	3)
+		echo "You speak English."
+		;;
+	4)
+		echo "You speak Spanish."
+		;;
+	5)
+		break
+		;;
+	*)
+		echo "Invalid option."
+		;;
+	esac
+done
+```
+---
+
+```bash
+#!/bin/bash
+PS3="Your choice:"
+select ITEM in "Add User" "List All Processes" "Kill Process" "Install Program" "Quit"
+do
+if [[ $REPLY = 1 ]]
+then
+	read -p "Enter the username:" username
+	output="$(grep -w $username /etc/passwd)"
+	if [[ -n "$output" ]]
+	then
+		echo "The username $usernam already exists."
+	else
+		sudo useradd -m -s /bin/bash "$username"
+		if [[ $? = 0 ]]
+		then
+			echo "The user was added successfully."
+			tail -n 1 /etc/passwd
+		else
+			echo "there was an error adding the user."
+		fi
+	fi
+elif [[ $REPLY = 2 ]]
+then
+	echo "Listing all processes..."
+	sleep 1
+	ps -f
+elif [[ $REPLY  = 3 ]]
+then
+	read -p "Enter the process to kill:" process
+	pkill $process
+elif [[ $REPLY = 4 ]]
+then
+	read -p "Enter the program to install:" app
+	sudo apt update && sudo apt install $app
+elif [[ $REPLY = 5 ]]
+then
+	echo "Bye!"
+	sleep 1
+	exit
+else
+	echo "Invalid option."
+fi
+done
+
+```
+
