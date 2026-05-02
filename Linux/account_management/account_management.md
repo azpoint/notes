@@ -6,7 +6,7 @@ Here it is reorganized into a clean, structured Markdown reference:
 
 ## 📂 Important System Files
 
-```bash id="p4x9zd"
+```bash
 /etc/passwd   # User accounts:
               # username:x:uid:gid:comment:home_directory:login_shell
 
@@ -19,13 +19,13 @@ Here it is reorganized into a clean, structured Markdown reference:
 
 ## ➕ Creating Users
 
-```bash id="v8q2lm"
+```bash
 useradd [OPTIONS] username
 ```
 
 ### Common Options
 
-```bash id="k1r7sn"
+```bash
 -m              # Create home directory
 -d directory    # Custom home directory
 -c "comment"    # Description (e.g., role)
@@ -36,7 +36,7 @@ useradd [OPTIONS] username
 
 ### Example
 
-```bash id="x3t9af"
+```bash
 useradd -m -d /home/john -c "C++ Developer" -s /bin/bash -G sudo,adm,mail john
 ```
 
@@ -44,13 +44,13 @@ useradd -m -d /home/john -c "C++ Developer" -s /bin/bash -G sudo,adm,mail john
 
 ## 🔧 Modifying Users
 
-```bash id="n6w2pb"
+```bash
 usermod [OPTIONS] username
 ```
 
 ### Example
 
-```bash id="z7k4qc"
+```bash
 # Add user to additional groups
 usermod -aG developers,managers john
 ```
@@ -59,7 +59,7 @@ usermod -aG developers,managers john
 
 ## ❌ Deleting Users
 
-```bash id="f2m8dx"
+```bash
 userdel -r username   # -r removes home directory
 ```
 
@@ -69,25 +69,25 @@ userdel -r username   # -r removes home directory
 
 ### Create a group
 
-```bash id="c9y5tr"
+```bash
 groupadd group_name
 ```
 
 ### Delete a group
 
-```bash id="u3h7vk"
+```bash
 groupdel group_name
 ```
 
 ### List all groups
 
-```bash id="e5p1jn"
+```bash
 cat /etc/group
 ```
 
 ### Show groups of a user
 
-```bash id="r8d2sx"
+```bash
 groups
 ```
 
@@ -95,7 +95,7 @@ groups
 
 ## 🛡️ Administrative Privileges
 
-```bash id="b4k6lw"
+```bash
 # Add user to admin group
 # Ubuntu: sudo group
 # CentOS: wheel group
@@ -109,27 +109,27 @@ usermod -aG sudo john
 
 ### Logged-in users
 
-```bash id="m7q3cz"
+```bash
 who -H
 ```
 
 ### Current user info
 
-```bash id="t1v8hp"
+```bash
 id        # UID, GID, groups
 whoami    # Effective user ID (EUID)
 ```
 
 ### Active sessions and load
 
-```bash id="g9n2xr"
+```bash
 w         # Who is logged in + current processes
 uptime    # System load and uptime
 ```
 
 ### Login history
 
-```bash id="s6k4yb"
+```bash
 last
 last -u username
 ```

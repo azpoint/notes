@@ -22,14 +22,14 @@ x = Execute
 
 ## 🔍 Viewing Permissions
 
-```bash id="k3v1zx"
+```bash
 # Using ls
 ls -l /etc/passwd
 # Example:
 # -rw-r--r-- 1 root root 2871 Aug 22 14:43 /etc/passwd
 ```
 
-```bash id="m8p4ds"
+```bash
 # Using stat (detailed view)
 stat /etc/shadow
 ```
@@ -40,7 +40,7 @@ stat /etc/shadow
 
 ### Symbolic (Relative) Mode
 
-```bash id="u7x2qa"
+```bash
 chmod u+r filename
 chmod u+r,g-wx,o-rwx filename
 chmod ug+rwx,o-wx filename
@@ -57,7 +57,7 @@ User Group Others
  r w x  r w x  r w x
 ```
 
-```bash id="n5c8fj"
+```bash
 chmod 777 filename   # rwx rwx rwx
 chmod 775 filename   # rwx rwx r-x
 chmod 755 filename   # rwx r-x r-x
@@ -71,7 +71,7 @@ chmod 640 filename   # rw- r-- ---
 
 ### Copy Permissions from Another File
 
-```bash id="q2l9wv"
+```bash
 chmod --reference=file1 file2
 ```
 
@@ -79,7 +79,7 @@ chmod --reference=file1 file2
 
 ### Recursive Changes
 
-```bash id="z8r6kt"
+```bash
 chmod -R u+rw,o-rwx filename
 ```
 
@@ -89,7 +89,7 @@ chmod -R u+rw,o-rwx filename
 
 ### 🔴 SUID (Set User ID)
 
-```bash id="x1b7qe"
+```bash
 # View
 ls -l /usr/bin/umount
 stat /usr/bin/umount
@@ -103,7 +103,7 @@ chmod 4755 executable_file   # Example: chmod 4755 script.sh
 
 ### 🔵 SGID (Set Group ID)
 
-```bash id="c4n2ps"
+```bash
 # View
 ls -ld projects/
 stat projects/
@@ -117,7 +117,7 @@ chmod g+s projects/
 
 ### 🟢 Sticky Bit
 
-```bash id="v9k3dj"
+```bash
 # View
 ls -ld /tmp/
 stat /tmp/
@@ -135,7 +135,7 @@ ls -ld temp/
 
 ## 🧮 UMASK
 
-```bash id="y6t8mr"
+```bash
 # Display current umask
 umask
 
@@ -149,7 +149,7 @@ umask 0022
 
 ### Change owner
 
-```bash id="h2p7lc"
+```bash
 chown new_owner file_or_directory
 # Example:
 sudo chown john a.txt
@@ -157,19 +157,19 @@ sudo chown john a.txt
 
 ### Change group
 
-```bash id="s8d4nx"
+```bash
 chgrp new_group file_or_directory
 ```
 
 ### Change owner and group
 
-```bash id="b5w1rf"
+```bash
 chown new_owner:new_group file_or_directory
 ```
 
 ### Recursive ownership change
 
-```bash id="t3q9az"
+```bash
 chown -R new_owner file_or_directory
 ```
 
@@ -177,7 +177,7 @@ chown -R new_owner file_or_directory
 
 ## 🧷 File Attributes (`chattr` / `lsattr`)
 
-```bash id="p7x6vn"
+```bash
 # View attributes
 lsattr filename
 
