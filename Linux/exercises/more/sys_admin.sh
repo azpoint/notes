@@ -1,63 +1,3 @@
-# Menus example
-
-```bash
-#!/bin/bash
-PS3="Choose your country: "
-select COUNTRY in Germany France USA SPAIN Quit
-do
-	case $REPLY in
-	1)
-		echo "You speak German."
-		;;
-	2)
-		echo "you Speak French."
-		;;
-	3)
-		echo "You speak English."
-		;;
-	4)
-		echo "You speak Spanish."
-		;;
-	5)
-		break
-		;;
-	*)
-		echo "Invalid option."
-		;;
-	esac
-done
-```
----
-
-```bash
-#!/bin/bash
-PS3="Choose an option: "
-
-select choice in date_time list_users display_disk_usage quit
-do
-
-    case $choice in
-        date_time)
-            date +"%F %H:%M:%S"
-            ;;
-        list_users)
-            who | awk '{print $1}' | sort -u
-            ;;
-        display_disk_usage)
-            df -h
-            ;;
-        quit)
-            echo "C ya"
-            exit 0
-            ;;
-        *)
-            echo "Invalid option."
-            ;;
-    esac
-done
-```
-
-```bash
 #!/bin/bash
 PS3="Your choice:"
 select ITEM in "Add User" "List All Processes" "Kill Process" "Install Program" "Quit"
@@ -101,6 +41,3 @@ else
 	echo "Invalid option."
 fi
 done
-
-```
-
