@@ -151,3 +151,11 @@ docker stack deploy -c fazb-stack.yml fazb
 ## ✅ That’s it!
 
 Your app is now deployed in **production via Docker Swarm**. 🎉
+
+---
+
+## Stop Deploy
+
+```bash
+docker stack rm fazb
+```
